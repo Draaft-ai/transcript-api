@@ -2,9 +2,11 @@ const express = require("express");
 const { YoutubeTranscript } = require("youtube-transcript");
 const app = express();
 
-app.get("/fetch", async (req, res) => {
+app.use(express.json());
+
+app.post("/fetch", async (req, res) => {
   const videoId = req.body.id;
-  const youtubeTranscript = await YoutubeTranscript.fetchTranscript(id);
+  const youtubeTranscript = await YoutubeTranscript.fetchTranscript(videoId);
 
   res.status(200).json({ data: JSON.stringify(youtubeTranscript) });
 });
